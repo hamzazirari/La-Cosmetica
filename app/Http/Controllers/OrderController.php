@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    // Créer une commande
     public function store(Request $request)
     {
         $request->validate([
