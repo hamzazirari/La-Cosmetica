@@ -73,4 +73,23 @@ public function cancel($id)
     ]);
 }
 
+
+public function prepare($id)
+{
+    $order = Order::findOrFail($id);
+
+    if ($order->status !== 'en_attente') {
+        return response()->json([
+            'message' => 'Commande déjà en préparation ou terminée'
+        ], 400);
+    }
+
+    $order->update(['status' => 'en_preparation']);
+
+    return response()->json([
+        'message' => 'Commande en préparation',
+        'order'   => $order,
+    ]);
+}
+
 }
